@@ -36,6 +36,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">  {{ $properties['native'] }}<span class="sr-only">(current)</span></a>
+                          </li>
+                          @endforeach
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -76,5 +81,8 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    @yield('scripts')
+
 </body>
 </html>
